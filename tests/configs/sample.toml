@@ -1,4 +1,9 @@
-["Dockron Heartbeat"]
-schedule = "@hourly"
+["Dockron Heartbeat1"]
+schedule = "* * * * *"
 image = "alpine"
-command = "echo 'hello, world!'"
+command = "sleep 10"
+
+["Dockron Heartbeat2"]
+schedule = "* * * * *"
+image = "alpine"
+command = "sleep 10"
