@@ -1,34 +1,38 @@
 const Docker = require('dockerode');
+const { merge } = require('lodash');
 
 const logger = require('./logger')(__filename);
 
-module.exports = opts => {
-    const docker = new Docker(opts);
+module.exports = (dockerOpts, containerOpts) => {
+    const docker = new Docker(dockerOpts);
+    const containerDefaults = {
+        Tty: true,
+        HostConfig: {
+            AutoRemove: true,
+        },
+    };
 
-    return (image, command) =>
-        docker
-            .createContainer({
-                image,
-                Cmd: command.split(' '),
-                Tty: true,
-                HostConfig: {
-                    AutoRemove: true,
-                },
-            })
-            .then(container => container.start())
-            .then(container =>
-                container.inspect((err, data) => {
-                    if (err) {
-                        logger.log('error', err);
-                    } else {
-                        logger.log(
-                            'debug',
-                            'Container launching - %s - %s',
-                            data.Id.slice(0, 12),
-                            command,
-                        );
-                    }
+    return async (image, command) => {
+        try {
+            if (!image) throw new Error('No image defined');
+            let container = await docker.createContainer(
+                merge(containerDefaults, {
+                    image,
+                    Cmd: command.split(' '),
+                    ...containerOpts,
                 }),
-            )
-            .catch(err => logger.log('error', err));
+            );
+            container = await container.start();
+            const data = await container.inspect();
+            logger.log(
+                'debug',
+                'Container launching - %s - %s',
+                data.Id.slice(0, 12),
+                command,
+            );
+        } catch (err) {
+            logger.log('error', err);
+        }
+        return true;
+    };
 };
