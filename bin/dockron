@@ -1,0 +1,17 @@
+#!/usr/bin/env node
+const { docopt } = require('docopt');
+const { cli } = require('../dockron/cli');
+
+const doc = `
+Usage: dockron [options]
+
+Options:
+  -h --help             Show this.
+  -v --validate         Validate config file only.
+  -c --config=<config>  Choose config file [default: /etc/dockron/dockron.toml]
+  -s --socket=<socket>  Choose Docker socket [default: /var/run/docker.sock]
+  -d --debug            Print the argument object (for debugging).
+  -l --level            Set logging level [default: 'info']
+`;
+
+cli(docopt(doc));
