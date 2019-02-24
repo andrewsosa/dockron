@@ -21,20 +21,15 @@ const flatten = conf =>
     Object.keys(conf).map(name => Object.assign(conf[name], { name }));
 
 module.exports = (path, fn) => {
-    const confpath = path || '/etc/dockron/dockron.toml';
-    fs.readFile(confpath, (err, data) => {
-        if (err) {
-            logger.error(err);
-            return;
-        }
+    try {
+        const data = fs.readFileSync(path);
         const parsed = toml.parse(data);
         const flat = flatten(parsed);
-        joi.validate(flat, specArray, valErr => {
-            if (valErr) {
-                logger.error(valErr);
-                return;
-            }
-            fn(flat);
-        });
-    });
+        joi.validate(flat, specArray);
+        logger.debug('Loaded config at %s', path);
+        fn(flat);
+    } catch (err) {
+        logger.error(err);
+        throw err;
+    }
 };

@@ -1,0 +1,9 @@
+["Dockron Heartbeat1"]
+schedule = "* * * * *"
+image =
+command = "sleep 10"
+
+["Dockron Heartbeat2]
+schedule = "* * * * *
+image = "alpine"
+command = sleep 10"

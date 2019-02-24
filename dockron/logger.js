@@ -25,7 +25,11 @@ const logger = caller =>
                     }`,
             ),
         ),
-        transports: [new transports.Console()],
+        transports: [
+            new transports.Console({
+                silent: process.env.NODE_ENV === 'test',
+            }),
+        ],
     });
 
 module.exports = logger;
