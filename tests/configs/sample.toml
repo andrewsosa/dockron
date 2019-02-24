@@ -1,0 +1,4 @@
+["Dockron Heartbeat"]
+schedule = "@hourly"
+image = "alpine"
+command = "echo 'hello, world!'"
