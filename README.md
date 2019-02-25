@@ -1,4 +1,4 @@
-# Dockron
+# :whale: Dockron
 > Simple task scheduling for Docker jobs
 
 ## :rocket: Features
@@ -7,8 +7,8 @@
 * **Simple**. Easy to install, configure, and deploy.
 
 
-## Installation
-You can install and run `dockron` using either [locally with npm]():
+## :hammer: Installation
+You can install and run `dockron` using either [locally with npm](https://npmjs.org/package/dockron):
 
 ```sh
 npm i -g dockron
@@ -20,7 +20,7 @@ docker pull andrewsosa/dockron
 ```
 
 
-## Usage
+## :computer: Usage
 ```sh
 Usage: dockron [options]
 
@@ -33,7 +33,7 @@ Options:
   -l --level            Set logging level [default: 'info']
 ```
 
-### Running with Docker
+### :whale: Running with Docker
 If running inside a Docker container, you will need to mount both a configuration file and the Docker socket.
 
 ```sh
@@ -49,7 +49,7 @@ FROM andrewsosa/dockron
 COPY ./path/to/dockron.toml /etc/dockron/dockron.toml
 ```
 
-## Configuration
+## :ledger: Configuration
 `dockron` expects a configuration at `/etc/dockron/dockron.toml`, but you can change that with `--config`.
 
 ```toml
