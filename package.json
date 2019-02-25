@@ -4,11 +4,24 @@
     "description": "Cron Scheduler for Docker jobs",
     "scripts": {
         "test": "jest --coverage",
-        "build": "pkg . --out-path dist"
+        "build": "pkg . --out-path dist",
+        "release": "release-it"
+    },
+    "release-it": {
+        "git": {
+            "tagName": "v${version}"
+        },
+        "github": {
+            "release": true
+        }
     },
     "repository": "https://github.com/andrewsosa/dockron",
     "bin": "./bin/dockron",
-    "keywords": [],
+    "keywords": [
+        "docker",
+        "cron",
+        "scheduler"
+    ],
     "author": "andrewsosa <andrew@andrewsosa.com>",
     "license": "MIT",
     "dependencies": {
@@ -29,6 +42,7 @@
         "eslint-plugin-prettier": "^3.0.1",
         "jest": "^24.1.0",
         "pkg": "^4.3.7",
-        "prettier": "^1.16.4"
+        "prettier": "^1.16.4",
+        "release-it": "^10.2.0"
     }
 }
