@@ -43,9 +43,24 @@ module.exports = (dockerOpts, containerOpts) => {
                 const dockerNet = await docker.getNetwork(networkId);
 
                 // Connect container to network
-                await dockerNet.connect({
-                    Container: container.id,
-                });
+                dockerNet.connect(
+                    {
+                        Container: container.id,
+                    },
+                    err => {
+                        if (err)
+                            logger.error(
+                                'Connection to endpoint failed - %s',
+                                err,
+                            );
+                        else
+                            logger.debug(
+                                'Connected container to network - %s - %s',
+                                container.id.slice(0, 12),
+                                networkId.slice(0, 12),
+                            );
+                    },
+                );
             }
 
             container = await container.start();
