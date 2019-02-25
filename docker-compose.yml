@@ -1,0 +1,10 @@
+version: '3.5'
+services:
+    dockron:
+        build:
+            context: .
+            dockerfile: dockerfiles/node.dockerfile
+        image: andrewsosa/dockron
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+            - ./example/sample.toml:/etc/dockron/dockron.toml

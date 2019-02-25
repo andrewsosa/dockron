@@ -30,6 +30,5 @@ module.exports = (path, fn) => {
         fn(flat);
     } catch (err) {
         logger.error(err);
-        throw err;
     }
 };

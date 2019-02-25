@@ -1,9 +1,4 @@
-["Dockron Heartbeat1"]
+["Dockron Heartbeat"]
 schedule = "* * * * *"
 image = "alpine"
-command = "sleep 10"
-
-["Dockron Heartbeat2"]
-schedule = "* * * * *"
-image = "alpine"
-command = "sleep 10"
+command = "sleep 1"

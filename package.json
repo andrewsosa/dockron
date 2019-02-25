@@ -1,12 +1,12 @@
 {
     "name": "dockron",
     "version": "0.0.1",
-    "description": "",
-    "main": "dockron/index.js",
+    "description": "Cron Scheduler for Docker jobs",
     "scripts": {
-        "test": "jest --coverage"
+        "test": "jest --coverage",
+        "build": "pkg . --out-path dist"
     },
-    "bin": "./dockron/cli.js",
+    "bin": "./bin/dockron",
     "keywords": [],
     "author": "andrewsosa <andrew@andrewsosa.com>",
     "license": "ISC",
@@ -27,6 +27,7 @@
         "eslint-plugin-jest": "^22.3.0",
         "eslint-plugin-prettier": "^3.0.1",
         "jest": "^24.1.0",
+        "pkg": "^4.3.7",
         "prettier": "^1.16.4"
     }
 }

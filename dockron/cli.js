@@ -17,8 +17,7 @@ function cleanArgs(opts) {
 function cli(args) {
     const { config, socket, validate } = cleanArgs(args);
 
-    const confPath = path.join(process.cwd(), config);
-
+    // const confPath = path.join(process.cwd(), config);
     const execute = executor({ socketPath: socket });
     const scheduler = Scheduler(execute);
 
@@ -26,7 +25,7 @@ function cli(args) {
         ? () => {}
         : conf => conf.map(spec => scheduler.schedule(spec.name, spec));
 
-    loadConfig(confPath, callback);
+    loadConfig(config, callback);
 }
 
 module.exports = { cleanArgs, cli };

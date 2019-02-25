@@ -12,9 +12,19 @@ module.exports = (dockerOpts, containerOpts) => {
         },
     };
 
+    // Test the connection
+    docker.info(err => {
+        if (err) logger.crit('Failed to connect to Docker daemon: %s', err);
+        else logger.debug('Connected to Docker daemon.');
+    });
+
     return async (image, command) => {
         try {
             if (!image) throw new Error('No image defined');
+
+            logger.debug('Pulling image - %s', image);
+            await docker.pull(image);
+
             let container = await docker.createContainer(
                 merge(containerDefaults, {
                     image,
