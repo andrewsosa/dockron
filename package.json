@@ -6,6 +6,7 @@
         "test": "jest --coverage",
         "build": "pkg . --out-path dist"
     },
+    "repository": "https://github.com/andrewsosa/dockron",
     "bin": "./bin/dockron",
     "keywords": [],
     "author": "andrewsosa <andrew@andrewsosa.com>",
