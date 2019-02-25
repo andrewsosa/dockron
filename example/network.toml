@@ -1,0 +1,11 @@
+["Ping-ee"]
+schedule = "* * * * *"
+image = "alpine"
+command = "sleep 30"
+network = "test_net"
+
+["Pinger"]
+schedule = "* * * * *"
+image = "alpine"
+command = "ping -c 30 87c2f9246231"
+network = "test_net"

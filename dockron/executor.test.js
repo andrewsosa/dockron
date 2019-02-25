@@ -22,6 +22,6 @@ describe('the docker executor', () => {
 
     test('gracefully fails with bad parameters', async () => {
         const execute = executor();
-        await expect(execute(null, 'not a command')).resolves.toBe(true);
+        await expect(execute("''", 'not a command')).resolves.toBe(true);
     });
 });

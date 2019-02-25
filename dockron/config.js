@@ -13,6 +13,7 @@ const specSchema = joi.object().keys({
         .regex(tagRegex)
         .required(),
     command: joi.string().required(),
+    network: joi.string().required(),
 });
 
 const specArray = joi.array().items(specSchema);
@@ -30,5 +31,6 @@ module.exports = (path, fn) => {
         fn(flat);
     } catch (err) {
         logger.error(err);
+        throw err;
     }
 };

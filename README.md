@@ -62,6 +62,7 @@ command = "sleep 10"
 schedule = "0 * * * *"
 image = "ubuntu"
 command = "echo 'Hello, world\!'"
+network = "my_network"
 ```
 
 

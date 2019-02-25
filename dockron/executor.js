@@ -1,5 +1,5 @@
 const Docker = require('dockerode');
-const { merge } = require('lodash');
+const { merge, find } = require('lodash');
 
 const logger = require('./logger')(__filename);
 
@@ -18,13 +18,15 @@ module.exports = (dockerOpts, containerOpts) => {
         else logger.debug('Connected to Docker daemon.');
     });
 
-    return async (image, command) => {
+    return async ({ image, command, network }) => {
         try {
             if (!image) throw new Error('No image defined');
 
+            // Pull Docker image
             logger.debug('Pulling image - %s', image);
             await docker.pull(image);
 
+            // Create the container
             let container = await docker.createContainer(
                 merge(containerDefaults, {
                     image,
@@ -32,6 +34,20 @@ module.exports = (dockerOpts, containerOpts) => {
                     ...containerOpts,
                 }),
             );
+
+            // If we have a network string, do network things:
+            if (network) {
+                // Find the network
+                const networks = await docker.listNetworks({ Name: network });
+                const networkId = find(networks, { Name: network }).Id;
+                const dockerNet = await docker.getNetwork(networkId);
+
+                // Connect container to network
+                await dockerNet.connect({
+                    Container: container.id,
+                });
+            }
+
             container = await container.start();
             const data = await container.inspect();
             logger.log(

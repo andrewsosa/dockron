@@ -13,7 +13,7 @@ module.exports = execute => ({
         );
         schedule.scheduleJob(spec.schedule, async () => {
             logger.log('info', '%s - Job started - %s', name, spec.command);
-            await execute(spec.image, spec.command);
+            await execute(spec);
             // logger.log('info', '%s - Job finished', name);
         });
     },
