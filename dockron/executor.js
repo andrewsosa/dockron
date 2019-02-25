@@ -64,11 +64,10 @@ module.exports = (dockerOpts, containerOpts) => {
             }
 
             container = await container.start();
-            const data = await container.inspect();
             logger.log(
                 'debug',
                 'Container launching - %s - %s',
-                data.Id.slice(0, 12),
+                container.id.slice(0, 12),
                 command,
             );
         } catch (err) {
