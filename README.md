@@ -72,5 +72,5 @@ network = "my_network"
 ## :car: Roadmap
 - [ ] Choosing a container name in dockron.toml
 - [ ] Allowing multiple networks in dockron.toml
-- [ ] Add environment variable interpolation
+- [x] Add environment variable interpolation (v0.2.0)
 - [ ] Add Docker event streaming (e.g. container exit)

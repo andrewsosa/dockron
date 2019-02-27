@@ -1,13 +1,26 @@
-all: build
+# Makefile for Docker build + test + release
+
+NAME	:= andrewsosa/dockron
+FILE	:= dockerfiles/node.dockerfile
+TAG		:= $$(./scripts/version.js)
+IMG		:= ${NAME}:${TAG}
+LATEST  := ${NAME}:latest
+CWD		:= $(shell pwd)
+
+all: clean build push
 
 build:
-	npm run build
+	docker build -t ${IMG} - < ${FILE}
+	docker tag ${IMG} ${LATEST}
 
-image:
-	docker build -t andrewsosa/dockron .
+test:
+	docker run --rm -t \
+		-v /var/run/docker.sock:/var/run/docker.sock \
+		-v ${CWD}/example/sample.toml:/etc/dockron/dockron.toml \
+		${LATEST} -v
 
-test-image:
-	docker run -v /var/run/docker.sock:/var/run/docker.sock -v /Users/andrew/Workspace/dockron/example/sample.toml:/etc/dockron/dockron.toml andrewsosa/dockron
+push:
+	docker push ${NAME}
 
 clean:
-	rm -rf dist/
+	-rm -rf dist/

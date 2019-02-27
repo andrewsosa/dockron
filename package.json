@@ -6,7 +6,8 @@
         "test": "jest",
         "coverage": "jest --coverage",
         "build": "pkg . --out-path dist",
-        "release": "release-it"
+        "release": "release-it",
+        "postrelease": "make build push"
     },
     "release-it": {
         "git": {

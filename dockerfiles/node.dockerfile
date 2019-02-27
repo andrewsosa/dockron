@@ -1,6 +1,3 @@
-FROM node:10
-WORKDIR /usr/src/dockron
-COPY . .
-RUN npm ci && \
-    npm link
-ENTRYPOINT [ "dockron" ]
+FROM node:10-alpine
+RUN npm i -g dockron
+ENTRYPOINT [ "/usr/local/bin/dockron" ]
