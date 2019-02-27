@@ -65,4 +65,12 @@ command = "echo 'Hello, world\!'"
 network = "my_network"
 ```
 
+<!-- ## :warning: Known Issues
+* Event parsing sometimes yields a `Unexpected token { in JSON at position 314`. This shouldn't affect functionality, just might disrupt event logging slightly. (#4) -->
 
+
+## :car: Roadmap
+- [ ] Choosing a container name in dockron.toml
+- [ ] Allowing multiple networks in dockron.toml
+- [ ] Add environment variable interpolation
+- [ ] Add Docker event streaming (e.g. container exit)
