@@ -1,0 +1,4 @@
+["Envvar Example"]
+schedule = "* * * * *"
+image = "alpine"
+command = "${TEST_VAR}"
