@@ -3,7 +3,8 @@
     "version": "0.1.3",
     "description": "Cron Scheduler for Docker jobs",
     "scripts": {
-        "test": "jest --coverage",
+        "test": "jest",
+        "coverage": "jest --coverage",
         "build": "pkg . --out-path dist",
         "release": "release-it"
     },
