@@ -1,7 +1,7 @@
 /* eslint-env jest */
 
 const fs = require('fs');
-const executor = require('./executor');
+const Executor = require('./executor');
 
 const testFilePath = '/tmp/testfile';
 
@@ -14,14 +14,22 @@ const containerOpts = {
 
 describe('the docker executor', () => {
     test('can run a containerized command', async () => {
-        const execute = executor({}, containerOpts);
+        const executor = new Executor({}, containerOpts);
         const testString = 'Hello, world';
-        await execute('alpine', `echo "${testString}" > ${testFilePath}`);
+        await executor.execute(
+            'alpine',
+            // `echo "${testString}" > ${testFilePath}`,
+            'echo "Hello world"',
+        );
         expect(fs.readFileSync(testFilePath, 'utf8')).toMatch(testString);
+        executor.eventSteam.destroy();
     });
 
     test('gracefully fails with bad parameters', async () => {
-        const execute = executor();
-        await expect(execute("''", 'not a command')).resolves.toBe(true);
+        const executor = new Executor();
+        await expect(executor.execute("''", 'not a command')).resolves.toBe(
+            true,
+        );
+        // executor.eventSteam.destroy();
     });
 });

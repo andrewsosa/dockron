@@ -1,6 +1,6 @@
 const path = require('path');
 const loadConfig = require('./config');
-const executor = require('./executor');
+const Executor = require('./executor');
 const Scheduler = require('./scheduler');
 
 // Remove -- from opts
@@ -20,7 +20,7 @@ function cli(args) {
     const confPath = path.isAbsolute(config)
         ? config
         : path.join(process.cwd(), config);
-    const execute = executor({ socketPath: socket });
+    const { execute } = new Executor({ socketPath: socket });
     const scheduler = Scheduler(execute);
 
     const callback = validate
