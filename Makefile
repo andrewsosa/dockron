@@ -7,7 +7,7 @@ IMG		:= ${NAME}:${TAG}
 LATEST  := ${NAME}:latest
 CWD		:= $(shell pwd)
 
-all: clean build push
+all: clean build test push
 
 build:
 	docker build -t ${IMG} - < ${FILE}
